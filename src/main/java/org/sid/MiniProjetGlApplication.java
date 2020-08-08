@@ -23,8 +23,8 @@ public class MiniProjetGlApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		utilisateurService.saveRole(new Role(null,"ADMIN")); //comite
-		utilisateurService.saveRole(new Role(null,"AUTEUR"));
+		//utilisateurService.saveRole(new Role(null,"ADMIN")); //comite
+		//utilisateurService.saveRole(new Role(null,"AUTEUR"));
 	}
 
 	@Bean

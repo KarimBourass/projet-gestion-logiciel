@@ -1,6 +1,7 @@
 package org.sid.dao;
 
 import org.sid.beans.Article;
+import org.sid.beans.MotsCles;
 import org.sid.beans.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,14 +15,14 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article,Long> {
 
-    @Query(value = "SELECT a from Article a WHERE a.decision = 'accepte' ")
-    List<Article> getPublicArticles();
+    @Query(value = "SELECT a from Article a WHERE a.decision like :dec ")
+    List<Article> getPublicArticles(@Param("dec") String dec);
 
     @Query(" SELECT a.etat from Article a WHERE a.idArticle like :id ")
     String findEtatById(@Param("id")Long id);
 
-    @Query(value = "SELECT a from Article a WHERE a.etat = 'en attente' ")
-    List<Article> getArticlesNonEvalue();
+    @Query(value = "SELECT a from Article a WHERE a.etat like :etat")
+    List<Article> getArticlesNonEvalue(@Param("etat")String etat);
 
 
     @Query(" SELECT a from Article a WHERE a.idArticle like :id ")
@@ -32,9 +33,9 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     @Query(" update Article a set a.decision=:decision where a.idArticle like :id ")
     void postDecision(@Param("id")Long idArticle,@Param("decision") String decision);
 
-    @Query(value = "SELECT a from Article a WHERE a.decision = 'accepte' AND a.motsCles like :mc")
-    List<Article> getPublicArticlesMotcLe(@Param("mc") String motCle);
-
     @Query(value = "SELECT a from Article a WHERE a.decision = 'accepte' AND a.auteur like :auteur")
     List<Article> getPublicArticlesAuteur(@Param("auteur")String auteur);
+
+
+
 }

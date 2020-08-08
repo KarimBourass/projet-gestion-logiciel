@@ -7,12 +7,7 @@ import org.sid.beans.Utilisateur;
 import org.sid.dao.UtilisateurRepository;
 import org.sid.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UtilisateurController {
@@ -30,7 +25,7 @@ public class UtilisateurController {
 		return utilisateurService.findById(id);
 	}
 	
-	@RequestMapping(value="/register",method=RequestMethod.POST)
+	@PostMapping(value="/register")
 	public Utilisateur saveUtilisateur(@RequestBody RegisterForm userForm ){
 		Utilisateur utilisateur=new Utilisateur();
 		if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("Vous devez confirmer votre mot de passe");
@@ -52,8 +47,11 @@ public class UtilisateurController {
 		utilisateur.setPassword(userForm.getPassword());
 		utilisateur.setEmail(userForm.getEmail());
 
-		utilisateurService.saveUtilisateur(utilisateur); 
-		utilisateurService.AddRoleToUser(userForm.getUsername(), "AUTEUR");
+		utilisateurService.saveUtilisateur(utilisateur);
+		if(userForm.getRole()=="ADMIN")
+			utilisateurService.AddRoleToUser(userForm.getUsername(), "ADMIN");
+		else
+			utilisateurService.AddRoleToUser(userForm.getUsername(), "AUTEUR");
 		
 		return utilisateur;
 	}

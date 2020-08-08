@@ -66,7 +66,7 @@ public Authentication attemptAuthentication(HttpServletRequest request, HttpServ
 		   //.claim("idUtilisateur",utilisateurRepository.loadCurrentUserId(springUser.getUsername()))
 		   .compact();
 		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX+jwtToken);;
-		System.out.println(response);
+		System.out.println(SecurityConstants.HEADER_STRING+SecurityConstants.TOKEN_PREFIX+jwtToken);
 	}
 
 	

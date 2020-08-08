@@ -28,8 +28,5 @@ public class AffectationService {
 
     }
 
-//    public List<String> getEvaluationArticle(Long id) {
-//        return affectationRepository.getCommentaire(id);
-//    }
 
 }

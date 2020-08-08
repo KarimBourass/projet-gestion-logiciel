@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		// acces public sans authentification
-		web.ignoring().antMatchers("/articles-public/**");
+		web.ignoring().antMatchers("/articles/**");
 	}
 
 

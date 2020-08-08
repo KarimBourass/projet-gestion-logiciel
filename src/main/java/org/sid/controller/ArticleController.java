@@ -21,18 +21,19 @@ public class ArticleController {
     @Autowired
     private AffectationService affectationService;
 
-    //Utilisateur non authentifié
-    //This is a public API
-    @GetMapping(value="/articles-public/mot-cle")
-    public List<ArticleReduit> getPublicArticlesParMotCLe(@RequestParam(value = "motCle") String motCle){
+    //Utilisateur non authentifié   This is a public API
+    //http://localhost:8080/articles?motCle=k
+    @GetMapping(value="/articles",params = "motCle")
+    public List<ArticleReduit> getPublicArticlesParMotCLe(@RequestParam(required = false,value = "motCle") String motCle){
         return articleService.getPublicArticlesParMotCLe(motCle);
     }
 
-    @GetMapping(value="/articles-public/auteur ")
-    public List<ArticleReduit> getPublicArticlesParAuteur(@RequestParam(value = "auteur")  String auteur){
+    //Utilisateur non authentifié       This is a public API
+    //Chercher par Auteur
+    @GetMapping(value="/articles",params = "auteur")
+    public List<ArticleReduit> getPublicArticlesParAuteur(@RequestParam(required = false,value = "auteur")  String auteur){
         return articleService.getPublicArticlesParAuteur(auteur);
     }
-
 
 
     //Utilisateur authentifié

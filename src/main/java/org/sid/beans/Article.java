@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
+
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -41,8 +38,7 @@ public class Article {
     //en attente  -  en evaluation  -   evalue
     private String etat;
 
-    @OneToMany
-    @JoinColumn(name = "article")
+    @OneToMany(mappedBy="article")
     @JsonIgnore
     private Set<MotsCles> motsCles=new HashSet<>();
 

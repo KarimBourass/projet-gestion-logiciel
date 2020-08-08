@@ -2,10 +2,8 @@ package org.sid.service;
 
 import org.sid.beans.Affectation;
 import org.sid.beans.Article;
-import org.sid.beans.Utilisateur;
 import org.sid.dao.AffectationRepository;
 import org.sid.dao.ArticleRepository;
-import org.sid.dao.ComiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +21,9 @@ public class ComiteService {
 
 
     public List<Article> getArticlesNonEvalue() {
-
-        return articleRepository.getArticlesNonEvalue();
+        String etat="en attente";
+        System.out.println("hnaaaaa");
+        return articleRepository.getArticlesNonEvalue(etat);
     }
 
     public void affectationArticle(Affectation affectation) {
@@ -40,9 +39,6 @@ public class ComiteService {
     }
 
 
-//    public void affectationArticle(Long idArticle, Utilisateur utilisateur) {
-//
-//        affectationRepository.affectationArticle(idArticle,utilisateur);
-//    }
+
 
 }

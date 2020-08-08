@@ -20,33 +20,32 @@ public class ComiteController {
     @Autowired
     private AffectationService affectationService;
 
-    //Utilisateur non authentifié
     @GetMapping(value="/evaluation-articles")
     public List<Article> getArticlesNonEvalue(){
         return comiteService.getArticlesNonEvalue();
     }
 
 
-    @PostMapping(value="/evaluation-articles/{id}")
-    public void affectationArticle(@RequestBody Affectation affectation){
+    @PostMapping(value="/affectattion/{id}")
+    public void affectationArticle(@PathVariable Long id,@RequestBody Affectation affectation){
         comiteService.affectationArticle(affectation);
     }
 
 
-    @PutMapping(value="/decision-articles/{id}")
+    @PutMapping(value="/decision/{id}")
     public void postDecision(@PathVariable Long id,@RequestBody String decision){
         comiteService.postDecision(id,decision);
     }
 
 
     // id == id de l'utilisateur (refree)
-    @GetMapping(value="/{id}/refree")
+    @GetMapping(value="/refree/{id}")
     public List<Affectation> getArticles(@PathVariable Long id){
         return affectationService.getArticlesPourEvaluation(id);
     }
 
     // id == id de l'utilisateur (refree)
-    @PutMapping(value="/{id}/refree")
+    @PutMapping(value="/refree/{id}")
     public void putEvaluation(@PathVariable Long id,@RequestBody Affectation affectation){
          affectationService.putEvaluation(id,affectation);
     }

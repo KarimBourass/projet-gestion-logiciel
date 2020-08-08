@@ -1,5 +1,6 @@
 package org.sid.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,10 @@ public class MotsCles {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long idMotsCles;
     private String motCle;
+
+    @ManyToOne
+    @JsonIgnore
+    private Article article;
 
 
 
