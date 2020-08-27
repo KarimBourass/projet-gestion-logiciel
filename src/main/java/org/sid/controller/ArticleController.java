@@ -1,5 +1,6 @@
 package org.sid.controller;
 
+import org.apache.log4j.Logger;
 import org.sid.beans.Article;
 import org.sid.beans.ArticleReduit;
 import org.sid.dao.AffectationRepository;
@@ -15,6 +16,8 @@ import java.util.Optional;
 @CrossOrigin
 public class ArticleController {
 
+    final static Logger logger = Logger.getLogger(ArticleController.class);
+
     @Autowired
     private ArticleService articleService;
 
@@ -25,6 +28,7 @@ public class ArticleController {
     //http://localhost:8080/articles?motCle=k
     @GetMapping(value="/articles",params = "motCle")
     public List<ArticleReduit> getPublicArticlesParMotCLe(@RequestParam(required = false,value = "motCle") String motCle){
+        logger.info("call for the public api /articles?motCle="+motCle);
         return articleService.getPublicArticlesParMotCLe(motCle);
     }
 
